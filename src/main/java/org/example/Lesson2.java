@@ -37,6 +37,7 @@ public class Lesson2 {
 
         System.out.println("\n--- Задание 11 ---");
         int[] filledArray = fillArray();
+        printArray(filledArray);
 
         System.out.println("\n--- Задание 12 ---");
         int[] numbersArray = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
