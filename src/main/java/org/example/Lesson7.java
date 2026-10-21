@@ -2,7 +2,6 @@ package org.example;
 
 public class Lesson7 {
 
-    // 1. Вычисление факториала числа
     public static long calculateFactorial(int n) {
         if (n < 0) {
             throw new IllegalArgumentException("Число не может быть отрицательным");
@@ -14,7 +13,6 @@ public class Lesson7 {
         return result;
     }
 
-    // 2. Вычисление площади треугольника (по формуле Герона)
     public static double calculateTriangleArea(double a, double b, double c) {
         if (a <= 0 || b <= 0 || c <= 0) {
             throw new IllegalArgumentException("Стороны должны быть положительными");
@@ -27,7 +25,6 @@ public class Lesson7 {
         return Math.sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
-    // 3. Арифметические действия с двумя целыми числами
     public static int add(int a, int b) { return a + b; }
     public static int subtract(int a, int b) { return a - b; }
     public static int multiply(int a, int b) { return a * b; }
@@ -37,8 +34,7 @@ public class Lesson7 {
         }
         return (double) a / b;
     }
-
-    // 4. Сравнение двух целых чисел
+    
     public static String compareNumbers(int a, int b) {
         if (a > b) return "a > b";
         if (a < b) return "a < b";
