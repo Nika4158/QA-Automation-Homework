@@ -34,7 +34,7 @@ public class Lesson7 {
         }
         return (double) a / b;
     }
-    
+
     public static String compareNumbers(int a, int b) {
         if (a > b) return "a > b";
         if (a < b) return "a < b";
