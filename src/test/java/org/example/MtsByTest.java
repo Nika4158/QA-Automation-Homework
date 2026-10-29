@@ -31,12 +31,11 @@ public class MtsByTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(20)); // Увеличили ожидание до 20 сек
-        js = (JavascriptExecutor) driver; // Инициализация JavascriptExecutor
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20)); 
+        js = (JavascriptExecutor) driver;
 
         driver.get("https://www.mts.by/");
 
-        // Делаем скриншот для диагностики
         try {
             Thread.sleep(3000);
             File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -45,16 +44,13 @@ public class MtsByTest {
             System.out.println("Не удалось сделать скриншот: " + e.getMessage());
         }
 
-        // Пытаемся закрыть баннер с куки через JavaScript (обходит перекрытия)
         try {
-            // Ждем появления кнопки "Принять" (может быть скрыта)
             WebElement cookieBtn = wait.until(ExpectedConditions.presenceOfElementLocated(
                     By.xpath("//button[contains(text(), 'Принять') or contains(text(), 'Согласен') or contains(text(), 'Принять все')]")
             ));
-            // Кликаем через JavaScript
             js.executeScript("arguments[0].click();", cookieBtn);
             System.out.println("Баннер с куки закрыт через JavaScript.");
-            Thread.sleep(1000); // Ждем, пока баннер исчезнет
+            Thread.sleep(1000);
         } catch (Exception e) {
             System.out.println("Баннер с куки не найден или уже закрыт: " + e.getMessage());
         }
@@ -62,25 +58,20 @@ public class MtsByTest {
 
     @Test
     public void testMtsPaymentBlock() {
-        // 1. Проверить название указанного блока
         System.out.println("Проверка 1: Название блока");
-        // Используем более гибкий XPath: ищем любой элемент, содержащий часть текста
         WebElement blockTitle = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//*[contains(text(), 'Онлайн пополнение')]")
         ));
-        // Прокручиваем к элементу через JS, чтобы он точно был виден
         js.executeScript("arguments[0].scrollIntoView(true);", blockTitle);
         assertTrue(blockTitle.isDisplayed(), "Блок 'Онлайн пополнение' не найден!");
         System.out.println("Блок найден: " + blockTitle.getText());
 
-        // 2. Проверить наличие логотипов платежных систем
         System.out.println("Проверка 2: Логотипы платежных систем");
         List<WebElement> logos = driver.findElements(
                 By.xpath("//img[contains(@src, 'visa') or contains(@src, 'mastercard') or contains(@src, 'belkart') or contains(@src, 'mir')]")
         );
         assertFalse(logos.isEmpty(), "Логотипы платежных систем не найдены!");
 
-        // 3. Проверить работу ссылки «Подробнее о сервисе»
         System.out.println("Проверка 3: Ссылка 'Подробнее о сервисе'");
         WebElement moreLink = wait.until(ExpectedConditions.presenceOfElementLocated(
                 By.xpath("//a[contains(text(), 'Подробнее о сервисе')]")
@@ -88,7 +79,6 @@ public class MtsByTest {
         js.executeScript("arguments[0].scrollIntoView(true);", moreLink);
         assertTrue(moreLink.isDisplayed(), "Ссылка 'Подробнее о сервисе' не найдена!");
 
-        // 4. Заполнить поля и проверить работу кнопки «Продолжить»
         System.out.println("Проверка 4: Заполнение формы и кнопка 'Продолжить'");
 
         WebElement communicationTab = wait.until(ExpectedConditions.presenceOfElementLocated(
