@@ -45,7 +45,6 @@ public class PaymentModalPage extends BasePage {
         super(driver);
     }
 
-    // Переключение в iframe (очень важно!)
     public void waitOfVisibilityFrame() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(paymentFrame));
         wait.until(ExpectedConditions.visibilityOf(paymentFrameContainer));

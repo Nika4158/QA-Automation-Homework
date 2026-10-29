@@ -50,12 +50,11 @@ public class PaymentBlockPage extends BasePage {
     @FindBy(id = "arrears-email")
     private WebElement arrearsEmailField;
 
-    // Вот та самая переменная, которой не хватало!
     private final JavascriptExecutor js;
 
     public PaymentBlockPage(WebDriver driver) {
         super(driver);
-        this.js = (JavascriptExecutor) driver; // Инициализация
+        this.js = (JavascriptExecutor) driver;
     }
 
     public String getPaymentTitle() {
@@ -70,7 +69,6 @@ public class PaymentBlockPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfAllElements(serviceTypeOptions));
         for (WebElement option : serviceTypeOptions) {
             if (option.getText().equals(typeName)) {
-                // Тот самый JS-клик для обхода перекрытий
                 js.executeScript("arguments[0].click();", option);
                 break;
             }

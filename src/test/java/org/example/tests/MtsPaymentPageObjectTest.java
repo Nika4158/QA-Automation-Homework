@@ -38,7 +38,6 @@ public class MtsPaymentPageObjectTest {
 
         driver.get("https://www.mts.by/");
 
-        // Закрываем куки, как в коде одногруппницы (по ID)
         try {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("cookie-agree"))).click();
         } catch (Exception ignored) {}
