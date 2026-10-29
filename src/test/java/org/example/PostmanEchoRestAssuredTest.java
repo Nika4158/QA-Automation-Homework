@@ -24,7 +24,7 @@ public class PostmanEchoRestAssuredTest {
                 .queryParams(params)
                 .when()
                 .get(baseUrl + "/get");
-        
+
         assertEquals(200, response.getStatusCode());
 
         String param1 = response.jsonPath().getString("args.foo1");
